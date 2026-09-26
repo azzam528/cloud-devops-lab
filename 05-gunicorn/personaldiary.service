@@ -1,0 +1,13 @@
+[Unit]
+Description=PersonalDiary Flask Application
+After=network.target
+
+[Service]
+User=azzam
+WorkingDirectory=/home/azzam/personaldiary
+EnvironmentFile=/home/azzam/personaldiary/.env
+ExecStart=/home/azzam/personaldiary/venv/bin/gunicorn --workers 2 --bind 127.0.0.1:5000 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
