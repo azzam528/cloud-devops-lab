@@ -1,0 +1,23 @@
+services:
+  app:
+    build: .
+    container_name: personaldiary-app
+    env_file:
+      - .env
+    expose:
+      - "5000"
+    volumes:
+      - static_data:/app/static
+
+  nginx:
+    image: nginx:alpine
+    container_name: personaldiary-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+
+volumes:
+  static_data:
